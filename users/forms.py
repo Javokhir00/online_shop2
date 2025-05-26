@@ -1,6 +1,7 @@
 from django import forms
 from .models import CustomUser
-
+from django import forms
+from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
@@ -34,8 +35,7 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('username',)
 
 
-from django import forms
-from django.core.exceptions import ValidationError
+
 
 
 class RegisterModelForm(forms.ModelForm):
