@@ -4,9 +4,6 @@ from django.contrib.auth import authenticate, login
 from .forms import LoginForm , RegisterModelForm
 
 
-
-
-
 def login_page(request):
     form = LoginForm()
     if request.method == 'POST':

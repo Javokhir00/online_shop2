@@ -54,7 +54,7 @@ class RegisterModelForm(forms.ModelForm):
         confirm_password = cleaned_data.get('confirm_password')
 
         if password and confirm_password and password != confirm_password:
-            raise ValidationError("Parollar mos emas.")
+            raise ValidationError("Confirm password didn't match")
 
         return cleaned_data
 
