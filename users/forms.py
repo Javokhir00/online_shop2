@@ -46,6 +46,7 @@ class RegisterModelForm(forms.ModelForm):
         fields = ('username', 'password', 'confirm_password')
         widgets = {
             'password': forms.PasswordInput(),
+            'confirm_password': forms.PasswordInput(),
         }
 
     def clean(self):

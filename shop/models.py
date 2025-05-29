@@ -78,3 +78,39 @@ class Comment(BaseModel):
 
     def __str__(self):
         return f'{self.name} - {self.rating}'
+
+
+class Attribute(BaseModel):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Attributes'
+
+
+
+
+class AttributeValue(BaseModel):
+    value = models.CharField(max_length=255)
+
+
+    def __str__(self):
+        return self.value
+
+    class Meta:
+        verbose_name_plural = 'Attribute values'
+
+
+
+class ProductAttribute(BaseModel):
+    attribute = models.ForeignKey('Product', related_name='attribute_keys', on_delete=models.CASCADE)
+    attribute_value = models.ForeignKey('Attribute', related_name='attribute_values', on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return f'{self.attribute} - {self.attribute_value}'
+
+    class Meta:
+        verbose_name_plural = 'Product Attributes'

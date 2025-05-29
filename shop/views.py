@@ -29,6 +29,18 @@ def index(request, category_id = None):
 
 
 
+def all_product_list(request):
+    products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'shop/list.html', context)
+
+
+def grid_display(request):
+    products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'shop/grid.html', context)
+
+
 def product_detail(request, product_id):
     try:
         products = Product.objects.get(id = product_id)
