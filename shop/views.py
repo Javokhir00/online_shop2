@@ -2,30 +2,48 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from shop.models import Product, Category, Comment
 from django.contrib import messages
-
+from django.views.generic import ListView
+from django.views import View
 # Create your views here.
 
 
 
 
-def index(request, category_id = None):
-    search_query = request.GET.get('q', '')
-    categories = Category.objects.all()
+# def index(request, category_id = None):
+#     search_query = request.GET.get('q', '')
+#     categories = Category.objects.all()
+#
+#
+#     if category_id:
+#         products = Product.objects.filter(category = category_id)
+#         return render(request, 'shop/list.html', {'products': products})
+#     else:
+#         products = Product.objects.all() #.order_by('price')
+#
+#     if search_query:
+#         products = products.filter(name__icontains = search_query)
+#
+#
+#
+#     context = {'products': products, 'categories': categories}
+#     return render(request, 'shop/home.html',  context)
 
+class Index(View):
+    def get(self, request, category_id = None):
+        search_query = request.GET.get('q', '')
+        categories = Category.objects.all()
 
-    if category_id:
-        products = Product.objects.filter(category = category_id)
-        return render(request, 'shop/list.html', {'products': products})
-    else:
-        products = Product.objects.all() #.order_by('price')
+        if category_id:
+            products = Product.objects.filter(category=category_id)
+            return render(request, 'shop/list.html', {'products': products})
+        else:
+            products = Product.objects.all()  # .order_by('price')
 
-    if search_query:
-        products = products.filter(name__icontains = search_query)
+            if search_query:
+                products = products.filter(name__icontains=search_query)
 
-
-
-    context = {'products': products, 'categories': categories}
-    return render(request, 'shop/home.html',  context)
+            context = {'products': products, 'categories': categories}
+            return render(request, 'shop/home.html', context)
 
 
 
