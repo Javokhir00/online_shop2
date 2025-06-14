@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'users',
-    # 'import_export',
+    'import_export',
+    'phonenumber_field',
+    'customer',
 ]
 
 JAZZMIN_SETTINGS = {

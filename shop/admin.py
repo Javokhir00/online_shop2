@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
 from shop.models import Category, Product, ProductImage, Comment, AttributeKey, AttributeValue, Attribute
-# from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
 # admin.site.register(Category)
@@ -20,13 +20,13 @@ class ProductImageInline(admin.TabularInline):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('name', 'category', 'price', 'avg_rating')
     list_filter = ('category', 'price', 'created_at')
     inlines = [ProductImageInline]
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ImportExportModelAdmin ,admin.ModelAdmin):
     list_display = ['title', 'image', 'slug']
 
     prepopulated_fields = {'slug': ('title',)}

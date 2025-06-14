@@ -122,4 +122,4 @@ class Attribute(BaseModel):
         return f'{self.product.name} - {self.attribute.key_name} - {self.attribute_value.value_name}'
 
     class Meta:
-        verbose_name_plural = 'Product Attributes'
+        verbose_name_plural = 'Attribute Products'
