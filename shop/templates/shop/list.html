@@ -56,11 +56,10 @@
                   <a class="text-500" href="{% url 'shop:products_by_category' product.category.id%}">{{product.category.title}}</a>
                 </p>
                 <ul class="list-unstyled d-none d-lg-block">
-                    <li><span class="fas fa-circle" data-fa-transform="shrink-12"></span><span>16GB RAM</span></li>
-                    <li><span class="fas fa-circle" data-fa-transform="shrink-12"></span><span>1TB SSD Hard Drive</span></li>
-                    <li><span class="fas fa-circle" data-fa-transform="shrink-12"></span><span>10-core Intel Xeon</span></li>
-                    <li><span class="fas fa-circle" data-fa-transform="shrink-12"></span><span>Mac OS</span></li>
-                    <li><span class="fas fa-circle" data-fa-transform="shrink-12"></span><span>Secured</span></li>
+
+                    {%for attr in product.attributes.all%}
+                                <li><span class="fas fa-circle" data-fa-transform="shrink-12"></span><span>{{attr.attribute_value.value_name}}</span></li>
+                    {%endfor%}
                 </ul>
               </div>
               <div class="col-lg-4 d-flex justify-content-between flex-column">

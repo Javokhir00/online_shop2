@@ -1,16 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-
-from shop.models import Category, Product, ProductImage, Comment, AttributeValue, Attribute, ProductAttribute
-
+from shop.models import Category, Product, ProductImage, Comment, AttributeKey, AttributeValue, Attribute
+# from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
-admin.site.register(Category)
+# admin.site.register(Category)
 # admin.site.register(Product)
 admin.site.register(Comment)
-# admin.site.register(Attribute)
-# admin.site.register(AttributeValue)
-# admin.site.register(ProductAttribute)
 
 
 # admin.site.unregister(User)
@@ -29,17 +25,17 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('category', 'price', 'created_at')
     inlines = [ProductImageInline]
 
-@admin.register(Attribute)
-class AttributeAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['title', 'image', 'slug']
 
-@admin.register(AttributeValue)
-class AttributeValueAdmin(admin.ModelAdmin):
-    list_display = ('value',)
+    prepopulated_fields = {'slug': ('title',)}
 
-# @admin.register(ProductAttribute)
-# class AttributeAdmin(admin.ModelAdmin):
-#     list_display = ('name',)
+
+admin.site.register(AttributeKey)
+admin.site.register(AttributeValue)
+admin.site.register(Attribute)
+
 
 admin.site.site_header = 'Admin'
 admin.site.site_title = 'Admin'

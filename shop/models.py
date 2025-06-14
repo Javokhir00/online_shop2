@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models import CASCADE
 from django.db.models import Avg
+from django.utils.text import slugify
+
 
 # Create your models here.
 
@@ -14,6 +16,12 @@ class BaseModel(models.Model):
 class Category(BaseModel):
     title = models.CharField(max_length=100, unique=True)
     image = models.ImageField(upload_to='category_images/')
+    slug = models.SlugField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.slug is None:
+            self.slug = slugify(self.title)
+        super(Category, self).save(*args, **kwargs)
 
 
     def __str__(self):
@@ -80,37 +88,38 @@ class Comment(BaseModel):
         return f'{self.name} - {self.rating}'
 
 
-class Attribute(BaseModel):
-    name = models.CharField(max_length=255)
+class AttributeKey(BaseModel):
+    key_name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.name
+        return self.key_name
 
     class Meta:
-        verbose_name_plural = 'Attributes'
+        verbose_name_plural = 'Attribute Keys'
 
 
 
 
 class AttributeValue(BaseModel):
-    value = models.CharField(max_length=255)
+    value_name = models.CharField(max_length=255)
 
 
     def __str__(self):
-        return self.value
+        return self.value_name
 
     class Meta:
-        verbose_name_plural = 'Attribute values'
+        verbose_name_plural = 'Attribute Values'
 
 
 
-class ProductAttribute(BaseModel):
-    attribute = models.ForeignKey('Product', related_name='attribute_keys', on_delete=models.CASCADE)
-    attribute_value = models.ForeignKey('Attribute', related_name='attribute_values', on_delete=models.CASCADE)
+class Attribute(BaseModel):
+    attribute = models.ForeignKey(AttributeKey, on_delete=models.CASCADE)
+    attribute_value = models.ForeignKey(AttributeValue, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name = 'attributes')
 
 
     def __str__(self):
-        return f'{self.attribute} - {self.attribute_value}'
+        return f'{self.product.name} - {self.attribute.key_name} - {self.attribute_value.value_name}'
 
     class Meta:
         verbose_name_plural = 'Product Attributes'
