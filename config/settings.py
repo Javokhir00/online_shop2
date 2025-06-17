@@ -150,6 +150,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+PHONENUMBER_DEFAULT_REGION = "UZ"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
@@ -171,3 +172,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "users.CustomUser"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'javohirjahongirovich3850@gmail.com'
+EMAIL_HOST_PASSWORD = 'fucc zcxw wpwo tekb'  # NOT your regular Gmail password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# send_mail(subject='Whassup man', message='Nothing...', from_email='javohirjahongirovich3850@gmail.com', recipient_list=['javohirtursunov2602@gmail.com'], fail_silently=False)

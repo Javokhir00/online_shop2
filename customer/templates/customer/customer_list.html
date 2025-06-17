@@ -1,3 +1,9 @@
+{% extends 'shop/base/base.html' %}
+
+{% load static %}
+
+{% block customer_list %}
+
 <div class="card mb-3" id="customersTable" data-list='{"valueNames":["name","email","phone","address","joined"],"page":10,"pagination":true}'>
             <div class="card-header">
               <div class="row flex-between-center">
@@ -803,3 +809,5 @@
           </footer>
 
 </div>
+
+{% endblock %}
