@@ -26,3 +26,5 @@ class EmailForm(forms.Form):
                 raise ValidationError(f"Invalid email: {email}")
 
         return emails
+
+
