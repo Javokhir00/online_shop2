@@ -32,6 +32,7 @@ class CategoryAdmin(ImportExportModelAdmin ,admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
+
 admin.site.register(AttributeKey)
 admin.site.register(AttributeValue)
 admin.site.register(Attribute)
